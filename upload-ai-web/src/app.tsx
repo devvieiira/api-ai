@@ -3,18 +3,20 @@ import { Button } from "./components/ui/button"
 import { Textarea } from "./components/ui/textarea"
 import { Separator } from "./components/ui/separator"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "./components/ui/select"
-import { Github, Wand2, Upload } from 'lucide-react'
+import { Github, Wand2 } from 'lucide-react'
 import { Slider } from "./components/ui/slider"
 import { VideoInputForm } from "./components/video-input-form"
 import { PromptSelect } from "./components/prompt-select"
 import { useState } from 'react'
 import { useCompletion } from 'ai/react'
 import { Switch } from "./components/ui/switch"
+import { Avatar, AvatarImage } from "./components/ui/avatar"
+import logo from '@/img/logo.png'
 
 type Theme = 'light' | 'dark'
 
 export function App() {
-  const [temperature, setTemperature] = useState(0.4)
+  const [temperature, setTemperature] = useState(0.5)
   const [videoId, setVideoId] = useState<string | null>(null)
 
   const [theme, setTheme] = useState<Theme>('dark')
@@ -45,8 +47,12 @@ export function App() {
     <div className={`min-h-screen flex flex-col bg-background ${theme === 'dark' ? 'dark' : ''}`}>
       <div className="px-6 py-3 flex items-center justify-between border-b">
         <div className="flex items-center gap-2">
-          <Upload className="w-4 h-4 ml-2 text-primary" />
-          <h1 className="text-xl font-bold text-primary">upload.ai</h1>
+          <h1 className="text-xl font-bold text-primary flex items-center">
+            <Avatar className="mr-4">
+              <AvatarImage src={logo} />
+            </Avatar>
+            myapi.ai
+          </h1>
         </div>
 
         <div className="flex items-center gap-3">
@@ -115,7 +121,9 @@ export function App() {
             <Separator />
 
             <div className="space-y-4 text-primary">
-              <Label>Temperatura</Label>
+              <Label>Temperatura
+                <span className="ml-2 text-xs text-muted-foreground">{temperature}</span>
+              </Label>
               <Slider
                 min={0}
                 max={1}
